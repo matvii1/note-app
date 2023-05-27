@@ -1,0 +1,15 @@
+@mixin card-hover-state {
+  translate: 0 -5px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  transition-property: translate, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+
+  &:hover,
+  &:focus {
+    @include card-hover-state();
+  }
+}

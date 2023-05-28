@@ -1,14 +1,13 @@
+import { useNoteContext } from '@/context/NoteProvider'
 import { useNote } from '@/hooks/useNote'
 import { FC } from 'react'
 import { Badge, Button, Col, Row, Stack } from 'react-bootstrap'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { Link, useNavigate } from 'react-router-dom'
 
-type Props = {
-  onDelete: (id: string) => void
-}
+const Note: FC = () => {
+  const { onDeleteNote: onDelete } = useNoteContext()
 
-const Note: FC<Props> = ({ onDelete }) => {
   const { tags, id, markdown } = useNote()
   const navigate = useNavigate()
 

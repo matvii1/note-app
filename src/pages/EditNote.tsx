@@ -1,17 +1,11 @@
 import NewForm from '@/components/NewForm'
+import { useNoteContext } from '@/context/NoteProvider'
 import { useNote } from '@/hooks/useNote'
-import { NoteData } from '@/types/NoteDataType'
-import { Tag } from '@/types/TagType'
 
 import { FC } from 'react'
 
-type Props = {
-  onSubmit: (id: string, data: NoteData) => void
-  onAddTag: (ta: Tag) => void
-  availableTags: Tag[]
-}
-
-const EditNote: FC<Props> = ({ onSubmit, onAddTag, availableTags }) => {
+const EditNote: FC = () => {
+  const { onUpdateNote } = useNoteContext()
   const { id, markdown, title, tags } = useNote()
 
   return (
@@ -22,9 +16,7 @@ const EditNote: FC<Props> = ({ onSubmit, onAddTag, availableTags }) => {
         markdown={markdown}
         title={title}
         tags={tags}
-        onSubmit={(data) => onSubmit(id, data)}
-        onAddTag={onAddTag}
-        availableTags={availableTags}
+        onSubmit={(data) => onUpdateNote(id, data)}
       />
     </>
   )

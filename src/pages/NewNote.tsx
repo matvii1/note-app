@@ -1,25 +1,18 @@
 import NewForm from '@/components/NewForm'
-import { NoteData } from '@/types/NoteDataType'
-import { Tag } from '@/types/TagType'
+import { useNoteContext } from '@/context/NoteProvider'
 
 import { FC } from 'react'
 
-type Props = {
-  onSubmit: (data: NoteData) => void
-  onAddTag: (ta: Tag) => void
-  availableTags: Tag[]
-}
+type Props = {}
 
-const NewNote: FC<Props> = ({ onSubmit, onAddTag, availableTags }) => {
+const NewNote: FC<Props> = () => {
+  const { onCreateNote } = useNoteContext()
+
   return (
     <>
       <h1 className="my-4">New note</h1>
 
-      <NewForm
-        onSubmit={onSubmit}
-        onAddTag={onAddTag}
-        availableTags={availableTags}
-      />
+      <NewForm onSubmit={onCreateNote} />
     </>
   )
 }

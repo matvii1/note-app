@@ -1,8 +1,7 @@
 import NotesList from '@/components/NotesList'
+import { useNoteContext } from '@/context/NoteProvider'
 import { useReactSelect } from '@/hooks/useReactSelect'
-import { Note } from '@/types/NoteType'
 import { SingeSelectTag } from '@/types/ReactSelectTagType'
-import { Tag } from '@/types/TagType'
 import { convertToReactSelect } from '@/utils/convertToReactSelect'
 import { getFilteredNotes } from '@/utils/getFilteredNotes'
 import { ChangeEvent, FC, useMemo, useState } from 'react'
@@ -10,14 +9,11 @@ import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ReactSelect from 'react-select'
 
-type Props = {
-  availableTags: Tag[]
-  notes: Note[]
-}
-
-const NotePage: FC<Props> = ({ availableTags, notes }) => {
+const NotePage: FC = () => {
   const { selectedTags, setSelectedTags } = useReactSelect([])
   const [title, setTitle] = useState('')
+
+  const { notes, availableTags } = useNoteContext()
 
   function handleSelectChange(tag: SingeSelectTag) {
     if (tag) {

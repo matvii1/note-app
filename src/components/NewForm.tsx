@@ -1,6 +1,6 @@
+import { useNoteContext } from '@/context/NoteProvider'
 import { useReactSelect } from '@/hooks/useReactSelect'
 import { NoteData } from '@/types/NoteDataType'
-import { Tag } from '@/types/TagType'
 import { convertToReactSelect } from '@/utils/convertToReactSelect'
 import { FC, FormEvent, useMemo, useRef } from 'react'
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap'
@@ -10,18 +10,15 @@ import { v4 as uuidV4 } from 'uuid'
 
 type Props = {
   onSubmit: (data: NoteData) => void
-  onAddTag: (ta: Tag) => void
-  availableTags: Tag[]
 } & Partial<NoteData>
 
 const NewForm: FC<Props> = ({
-  onSubmit,
-  availableTags,
-  onAddTag,
   title = '',
   markdown = '',
   tags = [],
+  onSubmit,
 }) => {
+  const { onAddTag, availableTags } = useNoteContext()
   const { handleReactSelectChange, selectedTags, setSelectedTags } =
     useReactSelect(tags)
 
